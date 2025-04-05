@@ -40,31 +40,12 @@ public class _02_TextUndoRedo implements KeyListener {
 	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	
 	
 	public static void main(String[] args) {
 		new _02_TextUndoRedo();
 	}
-
-
-
-
-
-
-
-
-
 
 
 
@@ -80,33 +61,29 @@ public class _02_TextUndoRedo implements KeyListener {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
 		char letter = e.getKeyChar();
-		label.setText(label.getText() + letter);
-		character.push(label.getText());
 		if(e.getExtendedKeyCode()==8) {
 			
-			System.out.println("A");
 			if(character.size()>0) {
 				System.out.println("B");
 				character.pop();
-				label.setText(character.peek());
+				if(character.size()>0) {
+					label.setText(character.peek());
+				}
+				else {
+					label.setText("");
+				}
 			}
 		
 		}
+		else {
+		
+			label.setText(label.getText() + letter);
+			character.push(label.getText());
+		}	
 		
 		
 	}
