@@ -34,8 +34,49 @@ import java.util.ArrayDeque;
 
 public class _02_BaseballTickets {
 
-    public static int calculateWaitTime( ArrayDeque<Integer> ticketsQueue, int position ) {
-        
-        return -1;
-    }
+	public static int calculateWaitTime( ArrayDeque<Integer> ticketsQueue, int position ) {
+		int timeElapsed = 0; 
+		int friendPos = position;
+		boolean notDone = true;
+		int friendTix=0;
+		while(notDone){
+			int tixNeededByFirst =  ticketsQueue.remove();
+			if(friendPos == 0 && tixNeededByFirst == 0) {
+				timeElapsed++;
+				return timeElapsed;
+			}
+		}
+		return timeElapsed;
+	}
 }
+/*
+ 
+  while(notDone){
+  
+  	remove front of queue save it into a variable X
+  	if friendPosition is 0, and X is 1,
+  			then add one to time and return
+  	
+  	if friendPosition is 0
+  	 		set friendPosition to end of queue index (?) .. size 
+  	 		add one to time
+  	 		put X-1 to back of Q
+  	else if X is 1
+  			add one to time
+  			friendPosition --
+   	else if X is > 1
+   			add one to time
+   			put X-1 to back of Q
+   			friendPosition --
+   	
+  
+  
+  
+  
+  
+  }
+  
+  
+  
+  
+ */
