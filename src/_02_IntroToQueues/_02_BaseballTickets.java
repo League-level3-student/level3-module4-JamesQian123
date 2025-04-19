@@ -38,17 +38,34 @@ public class _02_BaseballTickets {
 		int timeElapsed = 0; 
 		int friendPos = position;
 		boolean notDone = true;
-		int friendTix=0;
+		
 		while(notDone){
 			int tixNeededByFirst =  ticketsQueue.remove();
-			if(friendPos == 0 && tixNeededByFirst == 0) {
+			if(friendPos == 0 && tixNeededByFirst == 1) {
 				timeElapsed++;
 				return timeElapsed;
 			}
+			else if(friendPos == 0) {
+				friendPos = ticketsQueue.size();
+				timeElapsed++;
+				
+				ticketsQueue.add(--tixNeededByFirst);
+			}
+			else if(tixNeededByFirst == 1) {
+				timeElapsed++;
+				friendPos--;
+			}
+			else if(tixNeededByFirst >1) {
+				timeElapsed++;
+				ticketsQueue.add(--tixNeededByFirst);
+				friendPos--;
+			}
+			
 		}
 		return timeElapsed;
 	}
 }
+
 /*
  
   while(notDone){
