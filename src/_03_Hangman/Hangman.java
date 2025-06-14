@@ -20,6 +20,7 @@ public class Hangman implements KeyListener {
 	JLabel label = new JLabel();
 	JLabel label2 = new JLabel();
 	int lives = 10;
+	String randomword;
 	public static void main(String[] args) {
 		Hangman hangman = new Hangman();
 		hangman.run();
@@ -29,7 +30,7 @@ public class Hangman implements KeyListener {
 		// TODO Auto-generated method stub
 		frame.add(panel);
 		panel.add(label);
-		frame.add(label2);
+		panel.add(label2);
 		frame.setSize(500, 500);
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -39,7 +40,7 @@ public class Hangman implements KeyListener {
 
 		// for loop that has all of the below:
 		for (int i = 0; i < numbr; i++) {
-			String randomword = utilites.readRandomLineFromFile("dictionary.txt");
+			randomword = utilites.readRandomLineFromFile("dictionary.txt");
 			words.push(randomword);
 			if (words.contains(randomword)) {
 				words.remove(i);
@@ -91,14 +92,29 @@ public class Hangman implements KeyListener {
 
 			StringBuilder stringbuilder = new StringBuilder(label.getText());
 			for (int i = 0; i < locations.size(); i++) {
-				if(locations.get(i) != key) {
-					lives--;
-					label2.setText("Lives :" + lives);
-				}
 				String keyAsString = Character.toString(key);
-				stringbuilder.replace(locations.get(i), locations.get(i)+1, keyAsString);
+				stringbuilder.replace(locations.get(i), locations.get(i) + 1, keyAsString);
 			}
 			label.setText(stringbuilder.toString());
+
+		} else {
+			lives--;
+			label2.setText("Lives :" + lives);
+			if (lives == 0) {
+				JOptionPane.showMessageDialog(null, "No more lives left");
+
+			}
 		}
+		if (label.getText().equals(mysteryWord) && lives > 0) {
+			mysteryWord = words.pop();
+			System.out.println(mysteryWord);
+			int charCount = mysteryWord.length();
+			label.setText("");
+			for (int i = 0; i < charCount; i++) {
+				label.setText(label.getText() + "_");
+			}
+
+		}
+
 	}
 }
